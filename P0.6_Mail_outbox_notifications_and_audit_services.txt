@@ -1,0 +1,22 @@
+PROMPT P0.6  Mail outbox, notifications and audit services
+============================================================
+
+ROLE: You are a senior backend engineer. Follow CLAUDE.md.
+READ FIRST: Volume 0 Parts 10.1 to 10.3; GBUS.mail, GBUS.audit, GBUS.notify, GBUS.inbox,
+GBUS.unread, GBUS.markRead in the prototype.
+TASK:
+1. packages/mail: mail.send(to, subject, text, meta) writes the outbox row (ID MSG-1001
+onward), then calls the provider adapter, then records status. Provide a dev adapter that
+only stores. Provide template files with variables; leave the template texts empty with TODO
+markers; each module prompt fills its own.
+2. Notifications service with the five address types, inbox query and read markers.
+3. Audit service audit.write({actor, role, scope, action, target, reason}) usable inside a
+transaction; audit.list({q, scope}) with search over actor, action, target.
+4. API routes for listing the outbox and the audit log with the permissions from Volume 1.
+CONSTRAINTS: audit rows are append-only; the database user used by the app has no UPDATE or
+DELETE right on the audit table.
+DONE WHEN: AC-FND-030 passes; a test proves the audit write rolls back with the business
+change.
+REPORT: docs/parity/p0-6.md.
+FINAL DECISIONS: obey the section Final decisions of this volume and Volume 00. They are
+decided; do not reopen them or ask for them.

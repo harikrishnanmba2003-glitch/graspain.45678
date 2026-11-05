@@ -1,0 +1,26 @@
+PROMPT P0.8  Seed script that reproduces the shared data
+============================================================
+
+ROLE: You are a senior engineer. Follow CLAUDE.md.
+READ FIRST: reference/data/Graspin_Shared_Logins_Reference.xlsx (all six sheets);
+reference/data/SHARED_LOGINS.csv; Volume 0 Part 13.
+TASK:
+1. Write packages/db/seed.ts that creates the Kalam demo institute (INST-KCA-01) with its
+owner, academic head, four coaches, four batches, 72 students (GID-300001 to GID-300072), 25
+exams, 2 pending host requests, 68 classes, 9 papers, a 102-question bank, 85 library items
+on 9 shelves, and the wallet balance of ₹54,080 with ₹14,400 set aside, exactly as the
+Shared data map sheet states.
+2. Create the six Xora team users (director, gm, controller, proctor, support, finance) with
+password Xora@2026, the institute staff with Kalam@2026 and the students with Learn@2026.
+Hash every password.
+3. Create the illustrative Xora centres, incidents, tickets and schedule used by the
+prototype’s Xora Operations screens ONLY when the environment variable GRASPIN_DEMO=1 is
+set. Never in production.
+4. Make the seed idempotent: running it twice leaves the same data.
+CONSTRAINTS: the seed refuses to run when NODE_ENV is production. Shared test passwords
+exist only in non-production environments.
+DONE WHEN: pnpm db:seed prints counts that match the workbook; AC-FND-001 passes for every
+login in the CSV (use a script that signs in with all of them).
+REPORT: docs/parity/p0-8.md with the counts table.
+FINAL DECISIONS: obey the section Final decisions of this volume and Volume 00. They are
+decided; do not reopen them or ask for them.

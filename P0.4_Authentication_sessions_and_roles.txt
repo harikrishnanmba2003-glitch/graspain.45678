@@ -1,0 +1,26 @@
+PROMPT P0.4  Authentication, sessions and roles
+============================================================
+
+ROLE: You are a senior security-minded engineer. Follow CLAUDE.md.
+READ FIRST: Volume 0 Part 6; the sign-in code of every console (search for “function
+admLogin” in 1_Xora_Operations.html and the equivalent login functions in the other seven
+files); the capability tables in Volume 1.
+TASK:
+1. In packages/auth implement: hash and verify (argon2id), sessions (HTTP-only secure
+cookie, server-side session record), sign-in, sign-out, change own password, admin reset
+(returns a one-time default password), lock-out (5 wrong attempts, 15 minutes), idle
+timeouts (staff 8 hours, students 12 hours).
+2. Implement the identity families x:, u:, s: and the rule that a sign-in is accepted only
+by the console that matches the role (AU-3).
+3. Implement can(user, capability) as a pure function with the capability table for Xora
+roles from Volume 1. Provide a server guard requireCapability(capability) and a React hook
+useCan(capability).
+4. Implement the exact messages in Part 6 (incorrect ID or password, empty fields, wrong
+current password, mismatch, weak password).
+5. Add the show or hide eye to every password input in packages/ui.
+CONSTRAINTS: no plain-text passwords anywhere, including seed files (the seed script hashes
+them). Never reveal whether the ID or the password was wrong.
+DONE WHEN: AC-FND-001 to 004 and AC-FND-020 to 024 pass.
+REPORT: docs/parity/p0-4.md including the capability table as implemented.
+FINAL DECISIONS: obey the section Final decisions of this volume and Volume 00. They are
+decided; do not reopen them or ask for them.

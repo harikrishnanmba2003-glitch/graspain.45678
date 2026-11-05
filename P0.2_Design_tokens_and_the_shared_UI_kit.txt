@@ -1,0 +1,31 @@
+PROMPT P0.2  Design tokens and the shared UI kit
+============================================================
+(Run once. Output: tokens, extracted CSS and the shared component kit.)
+
+ROLE: You are a senior front-end engineer. Follow CLAUDE.md.
+READ FIRST: Volume 0 Part 9; the <style> block of
+reference/prototype/1_Xora_Operations.html; compare it with the <style> block of
+7_Student_App.html and 6_Coach_Portal.html.
+TASK:
+1. Write tools/extract-css: a script that reads every <style> block from the eight prototype
+consoles, merges and de-duplicates rules, and writes packages/ui/src/graspin.css and
+packages/ui/src/classes.json (class names with the consoles that use them). Report any rule
+that differs between consoles.
+2. Put the :root variables into packages/ui/src/tokens.css exactly as in the prototype. Do
+not rename or round any value.
+3. Build React components in packages/ui for every row of the Part 9.2 table: AppShell,
+NavItem, Card (with header), Kpi, Chip, Button, Segmented, Table, Callout, Field, Grid,
+List, StackedBar, Steps, Modal, Drawer, Toast, CameraTile, Avatar, ConfirmReason. Components
+render the same class names as the prototype so the extracted CSS applies unchanged.
+4. Build a Storybook-style page at apps/ops/ui-kit that shows each component in every
+variant next to the matching screenshot crop from reference/screens/ui.
+CONSTRAINTS: do not use a component library or a utility CSS framework. Do not change any
+colour, size, radius or spacing. Icons: copy the prototype’s SVG icon set into
+packages/ui/src/icons.ts.
+DONE WHEN: the ui-kit page passes the picture comparison at 2 percent or less for each
+component; Modal returns control correctly (an action that returns false keeps it open; Esc
+and outside click close it); Toast disappears after 3.8 seconds.
+REPORT: docs/parity/p0-2.md with the differences found between consoles’ CSS and how you
+resolved each.
+FINAL DECISIONS: obey the section Final decisions of this volume and Volume 00. They are
+decided; do not reopen them or ask for them.

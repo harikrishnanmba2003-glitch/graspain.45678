@@ -1,0 +1,20 @@
+PROMPT P0.7  Realtime gateway
+============================================================
+
+ROLE: You are a senior backend engineer. Follow CLAUDE.md.
+READ FIRST: Volume 0 Part 10.4; the GBUS.on function and how consoles re-render on a storage
+event (search “GBUS.on” in 1_Xora_Operations.html).
+TASK:
+1. Build a WebSocket gateway (with Redis fan-out) that authenticates with the session
+cookie, scopes channels by institute (Xora roles may join all), and publishes the events in
+the Part 10.4 table.
+2. Build a client hook useLive(eventNames, reload) in packages/ui that calls reload when an
+event arrives, but defers while a text field has focus.
+3. Add a heartbeat and automatic reconnection with a small “Reconnecting” notice.
+CONSTRAINTS: events carry identifiers and small counts only; the client re-reads data from
+the API.
+DONE WHEN: AC-FND-031 passes with two browser contexts; a user from institute A never
+receives institute B events (test).
+REPORT: docs/parity/p0-7.md.
+FINAL DECISIONS: obey the section Final decisions of this volume and Volume 00. They are
+decided; do not reopen them or ask for them.

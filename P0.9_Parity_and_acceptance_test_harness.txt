@@ -1,0 +1,25 @@
+PROMPT P0.9  Parity and acceptance test harness
+============================================================
+
+ROLE: You are a senior QA engineer. Follow CLAUDE.md.
+READ FIRST: Volume 0 Part 11.
+TASK:
+1. Build packages/testing with a Playwright harness that starts the prototype on port 8765
+and the target app on its port, seeds both with the same data, and freezes the clock at 6
+Oct 2026 10:00 IST.
+2. Implement text comparison (visible headings, buttons, table headers, field labels,
+placeholders, chips, callouts) and picture comparison (1440 × 900, pixelmatch, masks for
+clock, live counters, camera wall, random avatar colours).
+3. Implement the command pnpm parity <module> reading a screen list from
+docs/specs/<module>.screens.json (each entry: route, prototype hash, steps to reach the
+state, mask selectors) and writing docs/parity/<module>.md with a table of screens, text
+differences, percentage difference and a link to the diff image.
+4. Provide a helper to log in to the prototype with the shared logins and to the target app
+with the same user.
+CONSTRAINTS: the harness never edits the prototype. Use fixed random seeds where the
+prototype uses Math.random in its simulation.
+DONE WHEN: the harness runs on the placeholder apps and reports “not built” for every screen
+without crashing; one sample screen (the Xora sign-in page) is compared end to end.
+REPORT: docs/parity/p0-9.md.
+FINAL DECISIONS: obey the section Final decisions of this volume and Volume 00. They are
+decided; do not reopen them or ask for them.

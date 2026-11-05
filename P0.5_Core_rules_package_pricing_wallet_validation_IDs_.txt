@@ -1,0 +1,24 @@
+PROMPT P0.5  Core rules package (pricing, wallet, validation, IDs)
+============================================================
+
+ROLE: You are a senior engineer. Follow CLAUDE.md.
+READ FIRST: Volume 0 Part 8 (all BR- rules and validators); in
+reference/prototype/1_Xora_Operations.html read GBUS.SLABS, GBUS.price, obPrice, obValidate,
+walletAvail, walletSweep, tierOf, invoiceText.
+TASK:
+1. Implement in packages/core, as pure functions with no framework imports:
+slabFor(students), priceFor(students, overrides), annual(monthly), minRecharge,
+suggestedRecharge, walletAvailable, shouldRemind(prev, available, threshold),
+validate.mobile/email/pin/name/reason/reference, nextOnboardingId, nextInvoiceNo, nextGid,
+defaultPassword(kind), formatINR, formatDate.
+2. Write one unit test per rule, named with the rule ID (for example “BR-002 annual price
+rounds”). Use the shared data from Part 13 as fixtures.
+3. Add a table-driven test that checks priceFor for 1, 249, 250, 500, 501, 1000, 1001
+students.
+4. Export obValidate as validateOnboarding(details) returning the first error message
+exactly as the prototype words it (Volume 1 Part 7).
+CONSTRAINTS: no I/O. No dates read from the system clock inside rules; pass “now” in.
+DONE WHEN: AC-FND-010 to 014 pass; test coverage on packages/core is at least 95 percent.
+REPORT: docs/parity/p0-5.md with the rule-to-function map.
+FINAL DECISIONS: obey the section Final decisions of this volume and Volume 00. They are
+decided; do not reopen them or ask for them.

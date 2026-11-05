@@ -1,0 +1,29 @@
+PROMPT P0.1  Bootstrap the monorepo and record decisions
+============================================================
+(Run once. Output: a working empty monorepo and the decision records.)
+
+ROLE: You are a senior engineer building Graspin. Follow CLAUDE.md.
+READ FIRST: CLAUDE.md, docs/build-packs (Volume 0 Parts 3 and 5),
+reference/prototype/Graspin_Suite.html.
+TASK:
+1. Create the pnpm monorepo exactly as laid out in Volume 0 Part 3.3: apps ops, biz, quest,
+admin, head, coach, student, library; packages ui, core, db, auth, comms, mail, testing;
+tools.
+2. Configure TypeScript strict mode, ESLint, Prettier, Vitest, Playwright, and one shared
+tsconfig.
+3. Create each app as a minimal Next.js app that shows only its console name and a link back
+to the launcher. Do not build any screen yet.
+4. Add scripts: dev, build, test, test:e2e, lint, typecheck, db:migrate, db:seed, parity.
+5. Write ADR files in docs/decisions for every row in Volume 0 Part 5.2, using the final
+answer in Volume 00 and the Final decisions section of each volume. Each ADR is half a page:
+context, decision, consequences.
+6. Create docs/questions.md with a heading and an empty list.
+7. Copy the reference kit into /reference as supplied. Do not modify it. Add a README in
+/reference saying it is read-only.
+CONSTRAINTS: no business logic, no UI beyond the placeholder. Do not change the names of
+apps or packages.
+DONE WHEN: pnpm install, pnpm lint, pnpm typecheck and pnpm test all pass; every app starts
+with pnpm dev --filter <app>.
+REPORT: docs/parity/p0-1.md listing the tree, the commands run and their output.
+FINAL DECISIONS: obey the section Final decisions of this volume and Volume 00. They are
+decided; do not reopen them or ask for them.

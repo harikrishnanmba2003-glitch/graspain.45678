@@ -1,0 +1,26 @@
+PROMPT P0.3  Database schema and migrations
+============================================================
+
+ROLE: You are a senior backend engineer. Follow CLAUDE.md.
+READ FIRST: Volume 0 Part 7 (entities and schema rules);
+reference/data/Graspin_Shared_Logins_Reference.xlsx (sheet “Shared data map”); the GBUS
+object and the institute fields in reference/prototype/1_Xora_Operations.html (search for
+“const GBUS”).
+TASK:
+1. Write packages/db/schema.prisma with every entity in Part 7.1. Use the prototype’s names
+where given. Money fields are Int (rupees). Timestamps are UTC.
+2. Add the status enums, unique constraints (user ID, GID, invoice number, onboarding ID,
+institute code), foreign keys and indexes from Part 7.2.
+3. Create the first migration and a db:reset script.
+4. Write a Wallet service function applyTxn(instituteId, type, amount, ref, note) that
+inserts a WalletTxn and updates balance and reserved in one transaction and refuses a
+negative balance.
+5. Write a nightly check function walletIntegrity() that compares balance with the ledger.
+CONSTRAINTS: do not store passwords in plain text. Do not add tables or columns that are not
+in Part 7 without writing a question in docs/questions.md.
+DONE WHEN: migrations apply to an empty database; AC-FND-040 passes; a test proves applyTxn
+rolls back when it would make the balance negative.
+REPORT: docs/parity/p0-3.md with an entity diagram in text form and every deviation from
+Part 7.
+FINAL DECISIONS: obey the section Final decisions of this volume and Volume 00. They are
+decided; do not reopen them or ask for them.
